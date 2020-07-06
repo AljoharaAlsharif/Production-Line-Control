@@ -1,0 +1,50 @@
+#include <Servo.h>
+
+Servo servo;
+int pos = 0;
+
+void setup() {
+  Serial.begin(9600);
+  servo.attach(9);
+}
+
+void loop() {
+  int s0 = analogRead(0);
+  int s1 = analogRead(1);
+  int s2 = analogRead(2);
+ 
+  if(s0>500)
+    IR1();
+
+  else if(s1>500)
+    IR2();
+    
+  else if (s2>500)
+   servo.write(0);
+  }
+
+void IR1(){
+      for (pos = 0; pos <= 45; pos += 2){
+    	servo.write(pos);
+    	delay(15);
+  	}
+	for (pos = 45; pos >= 0; pos -= 2){
+    	servo.write(pos);
+		delay(15);
+	}
+    
+    delay(1000);
+}
+
+void IR2(){
+      for (pos = 0; pos <= 150; pos += 2){
+    	servo.write(pos);
+    	delay(15);
+  	}
+	for (pos = 150; pos >= 0; pos -= 2){
+    	servo.write(pos);
+		delay(15);
+	}
+    
+    delay(1000);
+}
